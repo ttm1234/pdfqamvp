@@ -1,3 +1,4 @@
+*.txt.yaml
 *.txt
 .idea/
 *.pdf
