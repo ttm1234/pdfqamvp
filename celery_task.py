@@ -20,6 +20,6 @@ def celery_process_pdf1(user_pdf_id: int):
 
 
 '''
-python3.9 -m celery worker -A celery_task -l INFO --pool=gevent --concurrency=10
-python3.9 -m celery worker -A celery_task -l INFO  --concurrency=10
+python3 -m celery worker -A celery_task -l INFO --pool=gevent --concurrency=10
+python3 -m celery worker -A celery_task -l INFO  --concurrency=10
 '''
