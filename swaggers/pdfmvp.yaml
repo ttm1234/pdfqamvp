@@ -1,0 +1,172 @@
+swagger: "2.0"
+
+info:
+  version: "1.0.0"
+  title: MVP API
+  description: MVP API
+
+basePath: "/pdfqamvp"
+
+paths:
+  /upload:
+    post:
+      operationId: routes.upload.api_upload
+      summary: 上传 pdf，返回 id
+      description: 上传 pdf，返回 id
+      consumes:
+        - multipart/form-data
+      parameters:
+#        - $ref: '#/parameters/user_jwt'
+        - name: file
+          in: formData
+          type: file
+      responses:
+        '200':
+          description: |
+            
+            | key      | 类型 | 含义        |
+            | ---- | ---- | ---- |
+            | user_pdf_id     | int    | 主键 |
+            | processed     | boolean    | 是否完成处理（生成摘要） |
+            ```
+            {
+                "code": 200,
+                "data": {
+                  "user_pdf_id": 1,
+                  "filename": "pdf-large.pdf",
+                  "file_md5": "e8361593a0d9405be44b447746378f72",
+                  "summary": "",
+                  "processed": false
+                },
+                "msg": "ok"
+            }
+            ```
+
+#  /query:
+#    get:
+#      operationId: routes.goods.api_goods_query
+#      tags:
+#        - 上传 pdf
+#      summary: 上传 pdf，返回 id
+#      description: 上传 pdf，返回 id
+#      parameters:
+#        - name: key
+#          in: query
+#          description: "关键词"
+#          default: apple
+#          required: true
+#          type: string
+#      responses:
+#        "200":
+#          description: |
+#            搜索商品
+#            code data msg 是固定格式
+#            在这个api中，data类型是list[dict]，dict中是业务需要的参数，详细解释如下
+#
+#            | key      | 类型 | 含义        |
+#            | ---- | ---- | ---- |
+#            | sku_id     | int    | sku_id |
+#            | title     | string    | title |
+#            | description     | string    | description |
+#
+#            例子
+#            ```
+#            {
+#              "code": 200,
+#              "data": [
+#                {
+#                  "sku_id": 5,
+#                  "title": "new apple",
+#                  "description": "this is a new apple"
+#                }
+#              ],
+#              "msg": "ok"
+#            }
+#            ```
+
+  /detail:
+    get:
+      operationId: routes.pdf_mvp.api_file_detail
+      summary: 获取文件信息，比如摘要
+      description: 获取文件信息，比如摘要
+      parameters:
+#        - $ref: '#/parameters/user_jwt'
+        - name: user_pdf_id
+          in: query
+          description: user_pdf_id
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: 和 /upload 的搜索接口返回一模一样
+
+
+  /answer:
+    get:
+      operationId: routes.pdf_mvp.api_answer
+      summary: give question, return answer
+      description: give question, return answer
+      parameters:
+        #        - $ref: '#/parameters/user_jwt'
+        - name: user_pdf_id
+          in: query
+          description: user_pdf_id
+          required: true
+          type: integer
+        - name: question
+          in: query
+          description: question
+          required: true
+          type: string
+      responses:
+        "200":
+          description: todo
+
+
+#  /update:
+#    post:
+#      operationId: routes.goods.api_goods_update
+#      tags:
+#        - 更新
+#      summary: 更新
+#      description: 更新商品, 参数 sku_id 在数据库有就更新，没有就创建。这个api不是题目要求的，做这个是展示异步更新的逻辑
+#      parameters:
+#        - $ref: '#/parameters/user_jwt'
+#        - name: post_goods_update_para
+#          in: body
+#          required: true
+#          schema:
+#            $ref: '#/definitions/post_goods_update_data'
+#      responses:
+#        "200":
+#          description: ok
+
+
+#parameters:
+#  user_jwt:
+#    name: GoodsSearch-Token
+#    in: header
+#    required: true
+#    type: string
+#    default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjQ4MjEzMzAyMTcsImN0IjoxNjk5MjY2MjE3fQ.mbTwkLMmORM1atKUkgMsIzpecdsgeTAb-B0-p5XGT6w
+#    description: 登录态 jwt token，在这个例子中，这里先写死。
+
+
+definitions:
+  post_goods_update_data:
+    type: object
+    properties:
+      sku_id:
+        type: integer
+        description: sku id, 数据库有就更新，没有就创建
+      title:
+        type: string
+        description: title
+      description:
+        type: string
+        description: description
+
+    required:
+      - sku_id
+      - title
+      - description
