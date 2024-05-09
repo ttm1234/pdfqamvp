@@ -9,6 +9,7 @@ file_upload/
 file_vectorstore/
 _history/
 _temp_temp.py
+_venv/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
