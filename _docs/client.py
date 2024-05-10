@@ -38,21 +38,24 @@ def get_detail():
 def get_answer():
     url = base_url + '/answer'
 
-    # msg = 'Give me a summary of chapter 7.'
-    # msg = 'Give me a summary of chapter 7: Designing the Document'
-    # msg = 'How many kinds of typefaces are mentioned in this document'
-    msg = 'How many kinds of typefaces are mentioned in chapter 7 Designing the Document'
+    questions = [
+        'Give me a summary of chapter 7.',
+        'Give me a summary of chapter 7: Designing the Document',
+        'How many kinds of typefaces are mentioned in this document',
+        'How many kinds of typefaces are mentioned in chapter 7 Designing the Document',
+    ]
 
-    data = {
-        'user_pdf_id': 1,
-        'question': msg,
-    }
-    r = requests.get(url, params=data, headers=headers)
-    response_log(r)
+    for i in questions:
+        data = {
+            'user_pdf_id': 1,
+            'question': i,
+        }
+        r = requests.get(url, params=data, headers=headers)
+        response_log(r)
 
 
 if __name__ == '__main__':
-    upload_file()
+    # upload_file()
     # get_detail()
-    # get_answer()
+    get_answer()
 

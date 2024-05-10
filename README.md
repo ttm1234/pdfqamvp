@@ -1,6 +1,9 @@
 
 ## 注意！！！！本项目使用的云api速度较慢，所以测试的时候需要等待较长时间
 
+## 项目地址
+https://github.com/ttm1234/pdfqamvp
+
 ## 配置文件
 1.项目根目录手动创建 `config.txt.yaml`，内容参照 `_docs/config.txt.yaml.template` 的内容来更改  
 2.项目根目录手动创建 `.env` ，内容参照 `_docs/.env.template` 的内容来更改  
