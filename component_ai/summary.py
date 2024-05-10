@@ -1,9 +1,10 @@
 from langchain.chains.summarize import load_summarize_chain
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from ._base import llm_tongyi, track_time, llm_openai
+from ._base import llm_tongyi, track_time, llm_openai, log_execution_time
 
 
 @track_time
+@log_execution_time
 def summarize_docs(docs):
     print('len(str(docs))', len(str(docs)))
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=100000, chunk_overlap=0)

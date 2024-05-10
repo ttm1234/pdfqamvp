@@ -2,7 +2,7 @@ from langchain import hub
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 
-from ._base import llm_tongyi, track_time, llm_openai
+from ._base import llm_tongyi, track_time, llm_openai, log_execution_time
 
 
 def format_docs(docs):
@@ -10,6 +10,7 @@ def format_docs(docs):
 
 
 @track_time
+@log_execution_time
 def get_rag_answer(vectorstore, question):
     retriever = vectorstore.as_retriever()
     prompt = hub.pull("rlm/rag-prompt")

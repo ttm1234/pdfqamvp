@@ -4,6 +4,9 @@ from langchain_openai import OpenAI
 
 import time
 from functools import wraps
+
+from util import log_execution_time
+
 import dotenv
 dotenv.load_dotenv()
 

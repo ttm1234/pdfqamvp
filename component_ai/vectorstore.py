@@ -1,7 +1,7 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
 
-from ._base import embeddings, track_time
+from ._base import embeddings, track_time, log_execution_time
 
 
 def _get_vectorstore_filename(_id):
@@ -9,6 +9,7 @@ def _get_vectorstore_filename(_id):
 
 
 @track_time
+@log_execution_time
 def generate_vectorstore(_id, docs):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     splits = text_splitter.split_documents(docs)
@@ -25,6 +26,7 @@ def generate_vectorstore(_id, docs):
 
 
 @track_time
+@log_execution_time
 def load_vectorstore(_id):
     vectorstore = Chroma(
         embedding_function=embeddings,
