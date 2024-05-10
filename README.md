@@ -23,11 +23,10 @@ python3 -m celery worker -A celery_task -l INFO  --concurrency=20
 之后访问 http://localhost:8000/pdfqamvp/ui/ 可以看到swagger-ui文档，
 
 ## 项目依赖
-- SQLDB: 直接使用了sqlite，减少多余对外依赖。
+- SQLDB: 直接使用了sqlite，减少多余对外依赖。在 config.txt.yaml 中直接配置 `DB_CONFIG: 'sqlite:///sqlite.db'`
 - openai: 由于海内外上网环境的差异，我在配置文件中修改了 `OPENAI_API_KEY` 和 `OPENAI_API_BASE`。
 - 阿里云大模型api，所以需要配置 `DASHSCOPE_API_KEY`
 - langSmith，需要配置 `LANGCHAIN_API_KEY`
 - sentry, 需要在 config.txt.yaml 配置 `sentry_dsn`
 - celery, 需要在 config.txt.yaml 配置 `broker_url`
 - redis, 需要在 config.txt.yaml 配置 redis 参数
-- sqldb, 在 config.txt.yaml 中直接配置 `DB_CONFIG: 'sqlite:///sqlite.db'`

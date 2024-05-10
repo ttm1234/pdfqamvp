@@ -17,7 +17,7 @@ def process_pdf(_id):
 
     # ----------------------------
     docs = component_ai.docs_from_pdf(user_pdf.full_filename)
-    # component_ai.generate_vectorstore(user_pdf.id, docs)
+    component_ai.generate_vectorstore(user_pdf.id, docs)
     summary = component_ai.summarize_docs(docs)
     user_pdf.update_status(summary)
     # for i in range(20):
